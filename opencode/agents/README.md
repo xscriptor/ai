@@ -440,67 +440,50 @@ cp agents/general/*.md ~/.config/opencode/agents/
 
 <h2 id="installation">Installation</h2>
 
-<p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a></p>
+<p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a> (agents live in <code>opencode/agents/</code>)</p>
 
-<p>All 91 agents can be installed via the install script (macOS, Linux, Windows WSL) or manually. The script is also executable remotely from GitHub.</p>
+<p>All 91 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
 
-<h3>Option 1: Remote Install (No Clone Needed)</h3>
+<h3>Option 1: npx (No Install)</h3>
 
-<pre><code># Install all 91 agents globally
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash
+<pre><code># All 91 agents to OpenCode
+npx @xscriptor/ai-agents
 
-# Install to current project
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --project
+# Specific groups
+npx @xscriptor/ai-agents --groups general,web/security,languages
 
-# Specific groups only
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --groups general,web/security,languages
+# To Claude Code
+npx @xscriptor/ai-agents --anthropic
 
-# Dry run (preview only)
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --dry-run
+# To project
+npx @xscriptor/ai-agents --project</code></pre>
 
-# Custom destination
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --dest ~/.config/opencode/agents</code></pre>
+<h3>Option 2: Remote Script (No Clone)</h3>
 
-<h3>Option 2: Clone and Install</h3>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash
+curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --project</code></pre>
+
+<h3>Option 3: Clone and Install</h3>
 
 <pre><code>git clone https://github.com/xscriptor/ai.git
-cd ai
+cd ai/opencode
 
-# All 91 agents, all 22 groups (default: global ~/.config/opencode/agents/)
+# All 91 agents (global ~/.config/opencode/agents/)
 ./scripts/install-agents.sh
 
-# Specific groups only
-./scripts/install-agents.sh --groups general,languages,web/frontend
+# Specific groups
+./scripts/install-agents.sh --groups general,web/security
 
-# Interactive selection
+# Interactive
 ./scripts/install-agents.sh --interactive
 
-# Project-level (.opencode/agents/)
-./scripts/install-agents.sh --project
+# Project-level
+./scripts/install-agents.sh --project</code></pre>
 
-# Custom path
-./scripts/install-agents.sh --dest ~/my-agents
+<h3>Option 4: Manual Copy</h3>
 
-# Preview
-./scripts/install-agents.sh --dry-run</code></pre>
-
-<h3>Option 3: Manual Copy (Selective)</h3>
-
-<pre><code># Clone only what you need (sparse checkout)
-git clone --depth 1 --filter=blob:none --sparse https://github.com/xscriptor/ai.git
-cd ai
-git sparse-checkout set agents/general agents/web/security
-
-# Copy specific agents
-cp agents/general/code-reviewer.md ~/.config/opencode/agents/
-cp agents/web/security/web-security-auditor.md ~/.config/opencode/agents/
-
-# Copy entire groups
-cp agents/general/*.md ~/.config/opencode/agents/
-cp agents/web/backend/*.md ~/.config/opencode/agents/
-
-# Project-level (committable to version control)
-cp agents/general/code-reviewer.md .opencode/agents/</code></pre>
+<pre><code>cp agents/general/code-reviewer.md ~/.config/opencode/agents/
+cp agents/web/security/web-security-auditor.md ~/.config/opencode/agents/</code></pre>
 
 <h2>Related Resources</h2>
 

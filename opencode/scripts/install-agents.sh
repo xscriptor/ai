@@ -1,10 +1,20 @@
 #!/usr/bin/env bash
 # Install OpenCode agents from https://github.com/xscriptor/ai to any destination.
 #
+# The repo is organized as:
+#   opencode/agents/    -> 91 agents for OpenCode (.md files)
+#   opencode/scripts/   -> utility scripts (this file lives here)
+#   anthropic/skills/   -> 3 skills for Claude Code (directory format)
+#   packages/           -> npm package @xscriptor/ai-agents
+#
 # Remote:
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --project
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --groups general,languages
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --project
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --groups general,languages
+#
+# Also available via npx:
+#   npx @xscriptor/ai-agents
+#   npx @xscriptor/ai-agents --anthropic
 #
 # Local:
 #   ./install-agents.sh                    # All 91 agents, global opencode
@@ -17,6 +27,14 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 AGENTS_SRC="$REPO_DIR/agents"
+
+# Detect platform
+case "$(uname -s)" in
+  Darwin) PLATFORM="macOS" ;;
+  Linux)  PLATFORM="Linux" ;;
+  MINGW*|MSYS*|CYGWIN*) PLATFORM="Windows (WSL/Git Bash)" ;;
+  *)      PLATFORM="$(uname -s)" ;;
+esac
 
 ALL_GROUPS=(
   general languages web/security web/architecture web/frontend web/backend
@@ -42,7 +60,9 @@ usage() {
   echo "Other options:"
   echo "  --dry-run          Preview without copying"
   echo "  --list             List available groups"
-  echo "  --help             Show this help"
+  echo "  --skills           Install skills to OpenCode (~/.config/opencode/skills/)
+  --anthropic        Install skills to Claude Code (~/.claude/skills/)
+  --help             Show this help"
 }
 
 list_groups() {
@@ -81,44 +101,10 @@ while [[ $# -gt 0 ]]; do
     --dry-run) DRY_RUN=1; shift ;;
     --list) list_groups; exit 0 ;;
     --help) usage; exit 0 ;;
+    --skills) DEST="${XDG_CONFIG_HOME:-$HOME/.config}/opencode/skills"; shift ;;
+    --anthropic) DEST="${HOME}/.claude/skills"; shift ;;
     *) echo "Unknown: $1"; usage; exit 1 ;;
-  esac
-done
 
-# If interactive, prompt for groups
-if [[ -n "${INTERACTIVE:-}" ]]; then
-  echo "Select groups (space-separated numbers, 'a' for all):"
-  for i in "${!ALL_GROUPS[@]}"; do
-    count=$(find "$AGENTS_SRC/${ALL_GROUPS[$i]}" -maxdepth 1 -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
-    echo "  $((i+1)). ${ALL_GROUPS[$i]} ($count agents)"
-  done
-  read -rp "> " selection
-  if [[ "$selection" == "a" ]]; then
-    SELECTED=("${ALL_GROUPS[@]}")
-  else
-    SELECTED=()
-    for idx in $selection; do
-      SELECTED+=("${ALL_GROUPS[$((idx-1))]}")
-    done
-  fi
-fi
-
-# Default to all if nothing selected
-if [[ -z "${SELECTED[*]:-}" ]]; then
-  SELECTED=("${ALL_GROUPS[@]}")
-fi
-
-# Default to global if no dest specified
-if [[ -z "$DEST" ]]; then
-  DEST=$(detect_opencode_global)
-fi
-
-# --- OS / platform info ---
-case "$(uname -s)" in
-  Darwin) PLATFORM="macOS" ;;
-  Linux)  PLATFORM="Linux" ;;
-  MINGW*|MSYS*|CYGWIN*) PLATFORM="Windows (WSL/Git Bash)" ;;
-  *)      PLATFORM="$(uname -s)" ;;
 esac
 
 # --- Execute ---
@@ -164,7 +150,7 @@ else
   echo "Usage: @agent-name in OpenCode (e.g. @code-reviewer)"
   echo ""
   echo "Notes:"
-  echo "  - These agents work with OpenCode's markdown agent system"
-  echo "  - Claude Code uses a different format (SKILL.md)"
-  echo "  - For project-level installs, commit .opencode/agents/ to version control"
+  echo "  - For Claude Code, use: npx @xscriptor/ai-agents --anthropic"
+  echo "  - Repo: https://github.com/xscriptor/ai"
+  echo "  - Structure: opencode/ (91 agents), anthropic/ (3 skills), packages/ (npm)"
 fi
