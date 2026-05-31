@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # Install OpenCode agents from https://github.com/xscriptor/ai to any destination.
 #
-# The repo is organized as:
-#   opencode/agents/    -> 91 agents for OpenCode (.md files)
-#   opencode/scripts/   -> utility scripts (this file lives here)
-#   anthropic/skills/   -> 3 skills for Claude Code (directory format)
-#   packages/           -> npm package @xscriptor/ai-agents
+# Repo structure:
+#   agents/      91 agents for OpenCode + Claude Code
+#   skills/      3 SKILL.md for both platforms
+#   scripts/     utility scripts (this file lives here)
+#   packages/    npm package @xscriptor/ai-agents
 #
 # Remote:
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --project
-#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --groups general,languages
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --project
+#   curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --groups general,languages
 #
 # Also available via npx:
 #   npx @xscriptor/ai-agents
@@ -60,9 +60,7 @@ usage() {
   echo "Other options:"
   echo "  --dry-run          Preview without copying"
   echo "  --list             List available groups"
-  echo "  --skills           Install skills to OpenCode (~/.config/opencode/skills/)
-  --anthropic        Install skills to Claude Code (~/.claude/skills/)
-  --help             Show this help"
+  echo "  --help             Show this help"
 }
 
 list_groups() {
@@ -101,11 +99,20 @@ while [[ $# -gt 0 ]]; do
     --dry-run) DRY_RUN=1; shift ;;
     --list) list_groups; exit 0 ;;
     --help) usage; exit 0 ;;
-    --skills) DEST="${XDG_CONFIG_HOME:-$HOME/.config}/opencode/skills"; shift ;;
-    --anthropic) DEST="${HOME}/.claude/skills"; shift ;;
+    --skills) echo "Use: npx @xscriptor/ai-agents --skills"; exit 0 ;;
+    --anthropic) echo "Use: npx @xscriptor/ai-agents --anthropic"; exit 0 ;;
     *) echo "Unknown: $1"; usage; exit 1 ;;
 
-esac
+  esac
+done
+
+# Defaults
+if [[ -z "${SELECTED[*]:-}" ]]; then
+  SELECTED=("${ALL_GROUPS[@]}")
+fi
+if [[ -z "$DEST" ]]; then
+  DEST=$(detect_opencode_global)
+fi
 
 # --- Execute ---
 echo "==> Xscriptor OpenCode Agents"
@@ -150,7 +157,8 @@ else
   echo "Usage: @agent-name in OpenCode (e.g. @code-reviewer)"
   echo ""
   echo "Notes:"
-  echo "  - For Claude Code, use: npx @xscriptor/ai-agents --anthropic"
+  echo "  - For skills: npx @xscriptor/ai-agents --skills"
+  echo "  - For Claude Code: npx @xscriptor/ai-agents --anthropic"
   echo "  - Repo: https://github.com/xscriptor/ai"
-  echo "  - Structure: opencode/ (91 agents), anthropic/ (3 skills), packages/ (npm)"
+  echo "  - Install: agents/, skills/, scripts/, packages/ai-agents/"
 fi

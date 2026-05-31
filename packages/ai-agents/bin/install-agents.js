@@ -32,6 +32,10 @@ Examples:
   npx @xscriptor/ai-agents --groups general,web/security --dry-run
 `;
 
+const REPO_AGENTS = join(REPO_DIR, "agents");
+const REPO_SKILLS = join(REPO_DIR, "skills");
+const REPO_ANTHROPIC = REPO_SKILLS; // skills/ works for both platforms
+
 const AGENT_GROUPS = [
   "general", "languages", "web/security", "web/architecture", "web/frontend", "web/backend",
   "mobile", "data-ml", "cloud", "testing", "content", "observability", "compliance",
@@ -40,12 +44,6 @@ const AGENT_GROUPS = [
 ];
 
 const SKILL_NAMES = ["xscriptor", "devx", "samurai"];
-
-function repoPath(...parts) {
-  const p = join(PKG_DIR, ...parts);
-  const m = join(REPO_DIR, ...parts);
-  return existsSync(p) ? p : m;
-}
 
 function dstPath(target) {
   const home = process.env.HOME || process.env.USERPROFILE || "";
@@ -88,10 +86,9 @@ function main() {
   if (args.includes("--help")) { console.log(HELP); return; }
 
   if (args.includes("--list")) {
-    const src = repoPath("opencode", "agents");
     console.log("Available agent groups:");
     for (const g of AGENT_GROUPS) {
-      const d = join(src, g);
+      const d = join(REPO_AGENTS, g);
       if (existsSync(d)) {
         const c = readdirSync(d).filter(f => f.endsWith(".md")).length;
         console.log(`  ${g.padEnd(25)} ${c} agents`);
@@ -99,11 +96,11 @@ function main() {
     }
     console.log("\nAvailable skills:");
     for (const s of SKILL_NAMES) {
-      const d = repoPath("opencode", "skills", "web", "literature", s);
-      const d2 = repoPath("opencode", "skills", "web", "dev", s);
-      const d3 = repoPath("opencode", "skills", "web", "cybersec", s);
+      const d = join(REPO_SKILLS, "web", "literature", s);
+      const d2 = join(REPO_SKILLS, "web", "dev", s);
+      const d3 = join(REPO_SKILLS, "web", "cybersec", s);
       const src = existsSync(d) ? d : existsSync(d2) ? d2 : existsSync(d3) ? d3 : null;
-      if (src) console.log(`  ${s}`);
+      if (src && existsSync(src)) console.log(`  ${s}`);
     }
     return;
   }
@@ -120,33 +117,41 @@ function main() {
   let count = 0;
 
   if (target === "anthropic") {
-    // Claude Code skills from anthropic/skills/
-    const src = repoPath("anthropic", "skills");
-    for (const skill of SKILL_NAMES) {
-      const sd = join(src, skill);
-      if (!existsSync(sd)) { console.log(`  [SKIP] ${skill}`); continue; }
-      console.log(`  [${skill}]`);
-      const c = copyDir(sd, join(dst, skill), dryRun);
-      count += c;
+    // Claude Code: install agents from agents/ + skills from skills/web/*/
+    const groupsArg = args.indexOf("--groups");
+    const selected = groupsArg >= 0 ? args[groupsArg + 1].split(",") : AGENT_GROUPS;
+    const agentDst = join(dst.replace("/skills", "/agents"));
+    for (const group of selected) {
+      const gs = join(REPO_AGENTS, group);
+      if (!existsSync(gs)) { console.log(`  [SKIP] ${group}`); continue; }
+      const files = readdirSync(gs).filter(f => f.endsWith(".md"));
+      if (files.length === 0) continue;
+      console.log(`  [agents/${group}]`);
+      for (const f of files) {
+        if (!dryRun) { mkdirSync(agentDst, { recursive: true }); copyFileSync(join(gs, f), join(agentDst, f)); }
+        console.log(`    ${dryRun ? "-" : "+"} ${f}`);
+        count++;
+      }
     }
-  } else if (target === "skills") {
-    // OpenCode skills from opencode/skills/web/*/
+  }
+
+  if (target === "skills" || target === "anthropic") {
+    // Skills from skills/web/*/
     const cats = ["literature", "dev", "cybersec"];
     const skillMap = { literature: "xscriptor", dev: "devx", cybersec: "samurai" };
     for (const cat of cats) {
-      const sd = repoPath("opencode", "skills", "web", cat, skillMap[cat]);
+      const sd = join(REPO_SKILLS, "web", cat, skillMap[cat]);
       if (!existsSync(sd)) continue;
       console.log(`  [${skillMap[cat]}]`);
       const c = copyDir(sd, join(dst, skillMap[cat]), dryRun);
       count += c;
     }
   } else {
-    // OpenCode agents from opencode/agents/
+    // OpenCode agents from agents/
     const groupsArg = args.indexOf("--groups");
     const selected = groupsArg >= 0 ? args[groupsArg + 1].split(",") : AGENT_GROUPS;
-    const src = repoPath("opencode", "agents");
     for (const group of selected) {
-      const gs = join(src, group);
+      const gs = join(REPO_AGENTS, group);
       if (!existsSync(gs)) { console.log(`  [SKIP] ${group}`); continue; }
       const files = readdirSync(gs).filter(f => f.endsWith(".md"));
       if (files.length === 0) { console.log(`  [SKIP] ${group} (empty)`); continue; }

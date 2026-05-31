@@ -440,7 +440,8 @@ cp agents/general/*.md ~/.config/opencode/agents/
 
 <h2 id="installation">Installation</h2>
 
-<p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a> (agents live in <code>opencode/agents/</code>)</p>
+<p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a><br>
+Agents: <code>opencode/agents/</code> | Skills: <code>skills/</code> | Scripts: <code>scripts/</code></p>
 
 <p>All 91 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
 
@@ -460,15 +461,15 @@ npx @xscriptor/ai-agents --project</code></pre>
 
 <h3>Option 2: Remote Script (No Clone)</h3>
 
-<pre><code>curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash
-curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/opencode/scripts/install-agents.sh | bash -s -- --project</code></pre>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash
+curl -fsSL https://raw.githubusercontent.com/xscriptor/ai/main/scripts/install-agents.sh | bash -s -- --project</code></pre>
 
 <h3>Option 3: Clone and Install</h3>
 
 <pre><code>git clone https://github.com/xscriptor/ai.git
-cd ai/opencode
+cd ai
 
-# All 91 agents (global ~/.config/opencode/agents/)
+# All 91 agents
 ./scripts/install-agents.sh
 
 # Specific groups
@@ -491,7 +492,7 @@ cp agents/web/security/web-security-auditor.md ~/.config/opencode/agents/</code>
   <li><a href="https://opencode.ai/docs/agents">OpenCode Agents Documentation</a></li>
   <li><a href="https://opencode.ai/docs/permissions">OpenCode Permissions Guide</a></li>
   <li><a href="../skills/">Skills</a></li>
-  <li><a href="../scripts/install-agents.sh">Agent Install Script</a></li>
+  <li><a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a></li>
 </ul>
 
 <div id="x" align="center">
