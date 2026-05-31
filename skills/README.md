@@ -99,6 +99,7 @@ cp -r skills/web/dev/devx .opencode/skills/</code></pre>
   <li><a href="https://opencode.ai/docs/skills">OpenCode Skills Documentation</a></li>
   <li><a href="../agents/">Agents</a></li>
   <li><a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a></li>
+  <li><a href="https://dev.xscriptor.com/en/resources/ai/">dev.xscriptor.com/en/resources/ai/</a></li>
 </ul>
 
 <div id="x" align="center">

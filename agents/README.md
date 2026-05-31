@@ -441,7 +441,7 @@ cp agents/general/*.md ~/.config/opencode/agents/
 <h2 id="installation">Installation</h2>
 
 <p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a><br>
-Agents: <code>opencode/agents/</code> | Skills: <code>skills/</code> | Scripts: <code>scripts/</code></p>
+Agents: <code>agents/</code> | Skills: <code>skills/</code> | Scripts: <code>scripts/</code></p>
 
 <p>All 91 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
 
