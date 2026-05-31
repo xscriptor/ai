@@ -4,7 +4,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-AGENTS_DIR="${SCRIPT_DIR}/agents"
+AGENTS_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)/agents"
 STRICT_MODE=false
 
 while [[ $# -gt 0 ]]; do
