@@ -14,6 +14,7 @@ permission:
   read: allow
   list: allow
   lsp: allow
+  webfetch: allow
 ---
 
 You are a test writer. Create comprehensive test suites for the codebase.

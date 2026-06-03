@@ -14,7 +14,7 @@ permission:
   grep: allow
   read: allow
   list: allow
-  lsp: allow
+  webfetch: allow
 ---
 
 You are a database migration specialist. Design and implement schema changes.

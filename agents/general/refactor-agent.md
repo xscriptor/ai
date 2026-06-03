@@ -17,6 +17,7 @@ permission:
   read: allow
   list: allow
   task: allow
+  webfetch: allow
 ---
 
 You are a refactoring specialist. Improve code structure and quality without changing behavior.

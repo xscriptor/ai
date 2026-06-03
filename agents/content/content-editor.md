@@ -10,6 +10,7 @@ permission:
   grep: allow
   read: allow
   list: allow
+  webfetch: deny
 ---
 
 You are an editor. Review content for clarity, consistency, and correctness.

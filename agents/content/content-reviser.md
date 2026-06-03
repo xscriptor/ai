@@ -10,6 +10,7 @@ permission:
   grep: allow
   read: allow
   list: allow
+  webfetch: deny
 ---
 
 You are a content reviser. Restructure and improve existing content.

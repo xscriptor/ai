@@ -12,6 +12,7 @@ permission:
   grep: allow
   read: allow
   list: allow
+  webfetch: allow
 ---
 
 You are an API documentation specialist. Document endpoints, schemas, and usage.
