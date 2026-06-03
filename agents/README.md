@@ -2,7 +2,7 @@
 
 <p>A collection of ready-to-use <a href="https://opencode.ai/docs/agents">OpenCode agent definitions</a> organized by context and specialization. Each agent is a markdown file with YAML frontmatter that configures its behavior, permissions, and system prompt.</p>
 
-<p><strong>162 agents</strong> across <strong>40 specialization groups</strong>. All agents are <strong>model-agnostic</strong> and work with Claude, GPT, DeepSeek, or any other LLM provider available in OpenCode.</p>
+<p><strong>182 agents</strong> across <strong>42 specialization groups</strong>. All agents are <strong>model-agnostic</strong> and work with Claude, GPT, DeepSeek, or any other LLM provider available in OpenCode.</p>
 
 <p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a></p>
 
@@ -46,6 +46,8 @@
   <li><a href="#medical-security">Medical Device Security</a></li>
   <li><a href="#aviation-maritime-energy">Aviation / Maritime / Energy</a></li>
   <li><a href="#physical-mainframe-security">Physical / Mainframe Security</a></li>
+  <li><a href="#mega-orchestrators">Mega Orchestrators</a></li>
+  <li><a href="#github">GitHub</a></li>
   <li><a href="#installation">Installation</a></li>
 </ul>
 
@@ -523,7 +525,7 @@ cp agents/general/*.md ~/.config/opencode/agents/
 <p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a><br>
 Agents: <code>agents/</code> | Skills: <code>skills/</code> | Scripts: <code>scripts/</code></p>
 
-<p>All 162 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
+<p>All 182 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
 
 <h3>Option 1: npx (No Install)</h3>
 
@@ -542,7 +544,7 @@ npx @xscriptor/ai-agents --project</code></pre>
 <h3>All 154 Agents by Group</h3>
 
 <ul>
-  <li>  <strong>General</strong> (12): code-reviewer, security-auditor, docs-writer, api-docs, refactor-agent, db-migrator, test-writer, dependency-auditor, performance-analyzer, pr-manager, release-manager, agent-creator</li>
+  <li>  <strong>General</strong> (21): code-reviewer, security-auditor, docs-writer, api-docs, refactor-agent, db-migrator, test-writer, dependency-auditor, performance-analyzer, pr-manager, release-manager, agent-creator, security-researcher, tech-researcher, research-lead, scientific-researcher, literary-researcher, cultural-researcher, psychology-researcher, trends-researcher, mega-researcher</li>
   <li><strong>Web / Security</strong> (6): web-security-auditor, api-security-specialist, auth-security-specialist, appsec-engineer, secure-coding, waf-specialist, cdn-edge-security</li>
   <li><strong>Web / Architecture</strong> (5): software-architect, system-designer, scalability-specialist, reliability-specialist, zero-trust-architect</li>
   <li><strong>Web / Frontend</strong> (7): react-specialist, vue-specialist, css-ui-specialist, frontend-performance, accessibility-specialist, nextjs-developer, angular-developer</li>
@@ -574,8 +576,38 @@ npx @xscriptor/ai-agents --project</code></pre>
   <li><strong>Hardware</strong> (1): hardware-security</li>
   <li><strong>Medical</strong> (1): medical-device-security</li>
   <li><strong>Aviation / Maritime / Energy</strong> (2): aviation-security, maritime-energy-security</li>
-  <li><strong>Physical / Mainframe</strong> (2): physical-security, mainframe-cyber-insurance-ediscovery</li>
+  <li>  <strong>Physical / Mainframe</strong> (2): physical-security, mainframe-cyber-insurance-ediscovery</li>
 </ul>
+
+<h2 id="mega-orchestrators">Mega Orchestrators</h2>
+
+<p>See <a href="mega/">mega/</a>.</p>
+
+<table>
+  <thead><tr><th>Agent</th><th>Workflow</th><th>Orchestrates</th></tr></thead>
+  <tbody>
+    <tr><td>Mega DevSecOps</td><td>CI/CD pipeline</td><td>Secure coding, supply chain, containers, deploy, observability</td></tr>
+    <tr><td>Mega IR</td><td>Incident response</td><td>SOC, forensics, network, threat intel, IR scripting, detection</td></tr>
+    <tr><td>Mega App Dev</td><td>Application development</td><td>Architecture, implementation, testing, review, release</td></tr>
+    <tr><td>Mega Compliance</td><td>Compliance readiness</td><td>Gap analysis, remediation, evidence, audit prep</td></tr>
+    <tr><td>Mega Security Assessment</td><td>Penetration testing</td><td>Recon, scanning, exploitation, PE, lateral, reporting</td></tr>
+    <tr><td>Mega Migration</td><td>Infrastructure migration</td><td>Audit, plan, migrate, parallel run, cutover, optimize</td></tr>
+    <tr><td>Mega Research + Action</td><td>Research → Implementation</td><td>Multi-layer research + workflow delegation</td></tr>
+  </tbody>
+</table>
+
+<h2 id="github">GitHub</h2>
+
+<p>See <a href="github/">github/</a>.</p>
+
+<table>
+  <thead><tr><th>Agent</th><th>File</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>GitHub Actions Workflow</td><td><code>github/actions-workflow.md</code></td><td>CI/CD pipelines, custom actions, reusable workflows, matrix builds, caching</td></tr>
+    <tr><td>GitHub Admin &amp; Security</td><td><code>github/admin-security.md</code></td><td>Branch protection, Dependabot, secret scanning, org security, CODEOWNERS</td></tr>
+    <tr><td>GitHub API &amp; Automation</td><td><code>github/api-automation.md</code></td><td>CLI automation, REST/GraphQL API, webhooks, bots, issue triage</td></tr>
+  </tbody>
+</table>
 
 <h3>Option 2: Remote Script (No Clone)</h3>
 
