@@ -1,7 +1,7 @@
 {
   "name": "@xscriptor/ai-agents",
   "version": "1.0.0",
-  "description": "154 ready-to-use AI agents for OpenCode and Claude Code. Code review, security, documentation, testing, cloud, mobile, systems, and more.",
+  "description": "162 ready-to-use AI agents for OpenCode and Claude Code. Code review, security, documentation, testing, cloud, mobile, systems, and more.",
   "keywords": [
     "opencode",
     "claude-code",

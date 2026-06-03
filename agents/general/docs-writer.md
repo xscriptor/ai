@@ -10,6 +10,7 @@ permission:
   grep: allow
   read: allow
   list: allow
+  webfetch: allow
 ---
 
 You are a technical writer. Create and improve project documentation.

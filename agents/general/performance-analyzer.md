@@ -13,6 +13,7 @@ permission:
   read: allow
   list: allow
   lsp: allow
+  webfetch: allow
 ---
 
 You are a performance analyst. Identify performance bottlenecks and optimization opportunities.

@@ -2,7 +2,7 @@
 
 <p>A collection of ready-to-use <a href="https://opencode.ai/docs/agents">OpenCode agent definitions</a> organized by context and specialization. Each agent is a markdown file with YAML frontmatter that configures its behavior, permissions, and system prompt.</p>
 
-<p><strong>154 agents</strong> across <strong>40 specialization groups</strong>. All agents are <strong>model-agnostic</strong> and work with Claude, GPT, DeepSeek, or any other LLM provider available in OpenCode.</p>
+<p><strong>162 agents</strong> across <strong>40 specialization groups</strong>. All agents are <strong>model-agnostic</strong> and work with Claude, GPT, DeepSeek, or any other LLM provider available in OpenCode.</p>
 
 <p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a></p>
 
@@ -523,7 +523,7 @@ cp agents/general/*.md ~/.config/opencode/agents/
 <p>Repository: <a href="https://github.com/xscriptor/ai">github.com/xscriptor/ai</a><br>
 Agents: <code>agents/</code> | Skills: <code>skills/</code> | Scripts: <code>scripts/</code></p>
 
-<p>All 154 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
+<p>All 162 agents can be installed via script, npx, or manually. Works on macOS, Linux, and Windows WSL.</p>
 
 <h3>Option 1: npx (No Install)</h3>
 
@@ -542,12 +542,12 @@ npx @xscriptor/ai-agents --project</code></pre>
 <h3>All 154 Agents by Group</h3>
 
 <ul>
-  <li><strong>General</strong> (11): code-reviewer, security-auditor, docs-writer, api-docs, refactor-agent, db-migrator, test-writer, dependency-auditor, performance-analyzer, pr-manager, release-manager</li>
+  <li>  <strong>General</strong> (12): code-reviewer, security-auditor, docs-writer, api-docs, refactor-agent, db-migrator, test-writer, dependency-auditor, performance-analyzer, pr-manager, release-manager, agent-creator</li>
   <li><strong>Web / Security</strong> (6): web-security-auditor, api-security-specialist, auth-security-specialist, appsec-engineer, secure-coding, waf-specialist, cdn-edge-security</li>
   <li><strong>Web / Architecture</strong> (5): software-architect, system-designer, scalability-specialist, reliability-specialist, zero-trust-architect</li>
   <li><strong>Web / Frontend</strong> (7): react-specialist, vue-specialist, css-ui-specialist, frontend-performance, accessibility-specialist, nextjs-developer, angular-developer</li>
   <li><strong>Web / Backend</strong> (7): api-designer, database-specialist, microservices-architect, devops-specialist, message-queue-specialist, caching-specialist, database-security</li>
-  <li><strong>Languages</strong> (6): python-developer, typescript-developer, go-developer, java-developer, kotlin-developer, rust-developer</li>
+  <li>  <strong>Languages</strong> (10): python-developer, typescript-developer, go-developer, java-developer, kotlin-developer, rust-developer, vscode-language-extension, vscode-lsp-extension, vscode-debug-extension, vscode-ui-extension</li>
   <li><strong>Mobile</strong> (6): ios-developer, android-developer, react-native-developer, flutter-developer, mobile-app-secure-coding, mobile-malware-analysis</li>
   <li><strong>Data &amp; ML</strong> (4): data-engineer, ml-engineer, mlops-specialist, data-scientist</li>
   <li><strong>Cloud</strong> (7): kubernetes-specialist, sre-specialist, gitops-specialist, service-mesh-specialist, cloud-architect, serverless-security, multi-cloud-networking</li>
@@ -563,7 +563,7 @@ npx @xscriptor/ai-agents --project</code></pre>
   <li><strong>Security / Blue Team</strong> (7): threat-hunting, incident-response, forensic-analysis, detection-engineering, threat-intelligence, vulnerability-management, soc-automation, digital-forensics</li>
   <li><strong>Security / Purple Team</strong> (2): purple-team, purple-team-automation</li>
   <li><strong>Security / AI &amp; ML</strong> (1): ai-ml-security</li>
-  <li><strong>Content</strong> (4): technical-writer, content-editor, content-reviser, translator</li>
+  <li>  <strong>Content</strong> (7): technical-writer, content-editor, content-reviser, translator, markdown-architect, markdown-html, markdown-editor</li>
   <li><strong>Observability</strong> (3): observability-specialist, opentelemetry-specialist, log-management-architect</li>
   <li><strong>Compliance</strong> (8): soc2-specialist, gdpr-specialist, grc-automation, pci-dss-specialist, hipaa-specialist, fedramp-specialist, sox-itgc-specialist</li>
   <li><strong>Systems</strong> (12): bash-zsh-specialist, linux-specialist, macos-specialist, linux-hardening, macos-hardening, ir-scripting, offensive-shell-scripting, network-security, windows-specialist, container-orchestration, storage-engineering</li>
